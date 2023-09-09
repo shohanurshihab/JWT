@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wkg4JQmYc42cVnTjh2DirNSD1wLggneB70sug8rcYmzEGWkALvYBxaSA67ngKrLNDwf0HaVBStEo7MH/G0Wu/g==",
+  "dgSpecHash": "64hppMsoOwVVisO9yC8Qaq/0g5LCJ8U+5eiiveLtbCComvpTDc2l+TZ+ZggPVKdeYBWd6WaYX98zamy4k/ugAA==",
   "success": true,
   "projectFilePath": "G:\\Core\\JWT\\JWT\\JWT.csproj",
   "expectedPackageFiles": [
@@ -31,6 +31,7 @@
     "C:\\Users\\Shihab\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\Shihab\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\Shihab\\.nuget\\packages\\microsoft.extensions.dependencymodel\\7.0.0\\microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512",
+    "C:\\Users\\Shihab\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\7.0.0\\microsoft.extensions.fileproviders.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\Shihab\\.nuget\\packages\\microsoft.extensions.logging\\7.0.0\\microsoft.extensions.logging.7.0.0.nupkg.sha512",
     "C:\\Users\\Shihab\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\Shihab\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",

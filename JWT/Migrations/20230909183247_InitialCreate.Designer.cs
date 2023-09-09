@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JWT.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230906212605_InitialCreate")]
+    [Migration("20230909183247_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -43,6 +43,9 @@ namespace JWT.Migrations
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 

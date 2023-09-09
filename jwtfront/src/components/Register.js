@@ -9,28 +9,42 @@ const RegisterForm = ({ history }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [photo, setPhoto] = useState(null);
+  const handlePhotoChange = (e) => {
+    const selectedPhoto = e.target.files[0];
+      setPhoto(selectedPhoto);
+    };
+  
+    
+  
   const handleRegister = () => {const data = {
     name:name,
     email:email,
-    passwordHash:password
+    passwordHash:password,
+    photo:photo
   };
+  
 
 // Or from localStorage
 const token = localStorage.getItem('token');
 
 const config = {
   headers: {
-    'Authorization': `Bearer ${token}`
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'multipart/form-data',
   }
 };
+
+
   const url = "https://localhost:7189/api/Users";
   axios.post(url,data,config).then((result)=>{
-    if(result.status===201){
+    if(result.status===201){ 
+        console.log(data)
         alert("Registration Succesfull");
         navigate("/");
     };
   }).catch((error)=>{
+    console.log(data)
     alert(error);})
   };
   const items = [
@@ -51,7 +65,15 @@ const config = {
           <div className="card shadow">
             <div className="card-body p-5">
               <h2 className="text-center mb-4">Register</h2>
-      <Form autoComplete='off'>
+      <Form autoComplete='off' encType='multipart/form-data'>
+      <Form.Group controlId="photo">
+        <Form.Label>Profile Photo</Form.Label>
+         <Form.Control
+           type="file"
+           accept="image/*"
+            onChange={handlePhotoChange}
+            />
+       </Form.Group>
         <Form.Group controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control

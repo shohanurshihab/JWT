@@ -41,6 +41,9 @@ namespace JWT.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");

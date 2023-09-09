@@ -14,6 +14,11 @@ const Dashboard = () => {
             label: "Logout",
         },
       ];
+    const token = localStorage.getItem('token');
+    const config = {
+        headers: {
+        'Authorization': `Bearer ${token}`
+        }}
   return (
     <><LeftNav items={items}/>
     <Container>

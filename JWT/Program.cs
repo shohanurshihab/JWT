@@ -2,7 +2,9 @@ using System.Text;
 using JWT;
 using JWT.Repo;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -18,6 +20,7 @@ builder.Services.AddCors(options => {
         builder.AllowAnyHeader();
     });
 });
+
 builder.Services.AddDbContext<DataContext>(options =>
     options.
     UseSqlServer("Server=DESKTOP-VTF839E\\SQLEXPRESS; Database=JWT; Trusted_Connection=true; TrustServerCertificate=true;"));
@@ -37,6 +40,12 @@ builder.Services.AddSwaggerGen(options =>
 });
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IAuth, AuthRepo>();
+builder.Services.AddSingleton<IFileProvider, PhysicalFileProvider>(sp =>
+{
+    var path = Path.Combine(Directory.GetCurrentDirectory(), "Images");
+    return new PhysicalFileProvider(path);
+});
+
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(options => {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -70,3 +79,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

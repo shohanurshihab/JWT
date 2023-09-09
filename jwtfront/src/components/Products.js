@@ -72,48 +72,113 @@ const Product = () => {
 
       {/* Product Details Modal */}
       <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>{selectedProduct && selectedProduct.Name}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* Detailed Information */}
-          {selectedProduct && (
-            <div>
-              <p>Category: {selectedProduct.CategoryName}</p>
-              <p>Unit: {selectedProduct.UnitName}</p>
-              <p>Code: {selectedProduct.Code}</p>
-              <p>Product Barcode: {selectedProduct.ProductBarcode}</p>
-              <p>Description: {selectedProduct.Description}</p>
-              <p>Brand: {selectedProduct.BrandName}</p>
-              <p>Size: {selectedProduct.SizeName}</p>
-              <p>Color: {selectedProduct.ColorName}</p>
-              <p>Model: {selectedProduct.ModelName}</p>
-              <p>Variant: {selectedProduct.VariantName}</p>
-              <p>Old Price: ${selectedProduct.OldPrice}</p>
-              <p>Cost Price: ${selectedProduct.CostPrice}</p>
-              <p>Stock: {selectedProduct.stock}</p>
-              <p>Total Purchase: {selectedProduct.TotalPurchase}</p>
-              <p>Last Purchase Date: {selectedProduct.LastPurchaseDate}</p>
-              <p>Last Purchase Supplier: {selectedProduct.LastPurchaseSupplier}</p>
-              <p>Total Sales: {selectedProduct.TotalSales}</p>
-              <p>Last Sales Date: {selectedProduct.LastSalesDate}</p>
-              <p>Last Sales Customer: {selectedProduct.LastSalesCustomer}</p>
-              <p>Type: {selectedProduct.Type}</p>
-              <p>Status: {selectedProduct.Status}</p>
-              <p>Commission Amount: ${selectedProduct.CommissionAmount}</p>
-              <p>Commission Percentage: {selectedProduct.CommissionPer}%</p>
-              <p>PCTN: {selectedProduct.PCTN}</p>
-            </div>
-          )}
-          {/* End of Detailed Information */}
-        </Modal.Body>
-        <Modal.Footer>
-            <br></br>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+  <Modal.Header closeButton>
+    <Modal.Title>{selectedProduct && selectedProduct.Name}</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    {selectedProduct && (
+      <div>
+        <h4>Product Details</h4>
+        <ul>
+          <li>
+            <strong>Category:</strong> {selectedProduct.CategoryName}
+          </li>
+          <li>
+            <strong>Unit:</strong> {selectedProduct.UnitName}
+          </li>
+          <li>
+            <strong>Code:</strong> {selectedProduct.Code}
+          </li>
+          <li>
+            <strong>Product Barcode:</strong> {selectedProduct.ProductBarcode}
+          </li>
+          <li>
+            <strong>Description:</strong> {selectedProduct.Description}
+          </li>
+          <li>
+            <strong>Brand:</strong> {selectedProduct.BrandName}
+          </li>
+          <li>
+            <strong>Size:</strong> {selectedProduct.SizeName}
+          </li>
+          <li>
+            <strong>Color:</strong> {selectedProduct.ColorName}
+          </li>
+          <li>
+            <strong>Model:</strong> {selectedProduct.ModelName}
+          </li>
+          <li>
+            <strong>Variant:</strong> {selectedProduct.VariantName}
+          </li>
+          <li>
+            <strong>Type:</strong> {selectedProduct.Type}
+          </li>
+          <li>
+            <strong>Status:</strong> {selectedProduct.Status}
+          </li>
+        </ul>
+
+        <h4>Pricing and Stock</h4>
+        <ul>
+          <li>
+            <strong>Old Price:</strong> ${selectedProduct.OldPrice}
+          </li>
+          <li>
+            <strong>Cost Price:</strong> ${selectedProduct.CostPrice}
+          </li>
+          <li>
+            <strong>Stock:</strong> {selectedProduct.stock}
+          </li>
+        </ul>
+
+        <h4>Purchase Information</h4>
+        <ul>
+          <li>
+            <strong>Total Purchase:</strong> {selectedProduct.TotalPurchase}
+          </li>
+          <li>
+            <strong>Last Purchase Date:</strong> {selectedProduct.LastPurchaseDate}
+          </li>
+          <li>
+            <strong>Last Purchase Supplier:</strong> {selectedProduct.LastPurchaseSupplier}
+          </li>
+        </ul>
+
+        <h4>Sales Information</h4>
+        <ul>
+          <li>
+            <strong>Total Sales:</strong> {selectedProduct.TotalSales}
+          </li>
+          <li>
+            <strong>Last Sales Date:</strong> {selectedProduct.LastSalesDate}
+          </li>
+          <li>
+            <strong>Last Sales Customer:</strong> {selectedProduct.LastSalesCustomer}
+          </li>
+        </ul>
+
+        <h4>Commission</h4>
+        <ul>
+          <li>
+            <strong>Commission Amount:</strong> ${selectedProduct.CommissionAmount}
+          </li>
+          <li>
+            <strong>Commission Percentage:</strong> {selectedProduct.CommissionPer}%
+          </li>
+        </ul>
+
+        <h4>PCTN</h4>
+        <p>{selectedProduct.PCTN}</p>
+      </div>
+    )}
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={handleCloseModal}>
+      Close
+    </Button>
+  </Modal.Footer>
+</Modal>
+
     </div></>
   );
 };

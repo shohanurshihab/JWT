@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,9 @@ import LeftNav from './LeftNav';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  
   const items = [
     {
       href: "/",
@@ -24,20 +27,47 @@ const LoginPage = () => {
       password:password
     };
     const url = "https://localhost:7189/api/Auth/login";
-    const response = axios.post(url,data).then((result)=>{
-      alert(result.data);
-      navigate("/dash");
-      console.log(result.data)
-      localStorage.setItem('id', result.data.res);
-      localStorage.setItem('token', result.data.token);
-    }).catch((error)=>{
-      alert(error);})
+
+    axios.post(url, data)
+      .then((result) => {
+        const message = result.data;
+        setModalMessage(message.token);
+        setShowModal(true);
+        localStorage.setItem('id', result.data.res);
+        localStorage.setItem('token', result.data.token);
+    
+        // Automatically close the modal after 5 seconds and navigate
+        setTimeout(() => {
+          setShowModal(false);
+          navigate("/dash");
+        }, 5000);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+    
   
   };
-
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+  
 
   return (
     <><LeftNav items={items}/>
+    
+  <Modal show={showModal} onHide={handleCloseModal} centered>
+    <Modal.Body style={{ maxHeight: '400px', overflowY: 'auto' }}>
+      <b>JWT:</b>
+    <textarea
+      style={{ width: '100%', height: '300px' }}
+      value={modalMessage}
+      readOnly
+    />
+    </Modal.Body>
+    {/* You can customize the modal appearance as needed */}
+  </Modal>
+
     <Container className="mt-5">
       <Row className="justify-content-center">
         <Col md={6}>

@@ -6,6 +6,7 @@ import Profile from './components/Profie';
 import Dash from "./components/Dash";
 import Products from "./components/Products";
 import Users from "./components/Users";
+import Logout from './components/Logout';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/products' element={<Products/>} />
           <Route path='/' element={<Login />} />
+          <Route path='/logout' element={<Logout />} />
         </Routes>
       </Router>
     </div>

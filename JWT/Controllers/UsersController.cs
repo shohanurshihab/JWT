@@ -3,7 +3,8 @@ using JWT.Repo;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 namespace JWT.Controllers
 {
     [Route("api/[controller]")]
@@ -12,9 +13,11 @@ namespace JWT.Controllers
     public class UsersController : ControllerBase
     {
         private IUserRepo repo;
-        public UsersController(IUserRepo repository)
+        private IFileProvider _fileProvider;
+        public UsersController(IUserRepo repository, IFileProvider fileProvider)
         {
             repo = repository;
+            _fileProvider = fileProvider;
         }
         [HttpGet]
         public IActionResult GetUsers()
@@ -34,18 +37,35 @@ namespace JWT.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult CreateUser(User user)
+        public async Task<IActionResult> CreateUser([FromForm] User user, IFormFile? photo)
         {
+            if (photo != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await photo.CopyToAsync(memoryStream);
+                    user.Photo = memoryStream.ToArray();
+                }
+            }
+
             repo.Create(user);
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
-        [AllowAnonymous]
         [HttpPut("{id}")]
-        public IActionResult UpdateUser(int id, User user)
+        public async Task<IActionResult> UpdateUser([FromForm] User user, IFormFile? photo,int id)
         {
             if (id != user.Id)
             {
                 return BadRequest();
+            }
+
+            if (photo != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await photo.CopyToAsync(memoryStream);
+                    user.Photo = memoryStream.ToArray();
+                }
             }
             repo.Update(user);
             return NoContent();
@@ -57,6 +77,7 @@ namespace JWT.Controllers
             repo.Delete(id);
             return NoContent();
         }
+        
     }
 
 }
